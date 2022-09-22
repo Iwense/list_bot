@@ -20,7 +20,6 @@ bot.on('message', msg => {
         bot.sendMessage(chatId, 'Вы можете искать по ФИО, Паспорту или любой информации из строки выше');
 
     }else{
-        console.log('serch = ', text);
         const test = /[а-яё0-9]/i;
         if (!test.test(text)){
             bot.sendMessage(chatId, 'Вы ввели что-то странное.');
@@ -32,8 +31,6 @@ bot.on('message', msg => {
                 }
                 return false;
             });
-
-            console.log('length = ', result.length)
 
             if (result.length > 100) {
                 bot.sendMessage(chatId, 'Ответ очень большой, уточните ваш запрос');
@@ -55,8 +52,7 @@ bot.on('message', msg => {
                     bot.sendMessage(chatId, 'Ничего не найдено');
                 }
             }
-
-            
+            bot.sendMessage(chatId, 'Чат помощи по мобилизации: @mobilizatia_poravalit');
         }
     }
 })
