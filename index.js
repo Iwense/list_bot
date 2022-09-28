@@ -1,8 +1,11 @@
 const TelegramApi = require('node-telegram-bot-api');
 const fs = require("fs");
+const { TelegramLogger } = require('node-telegram-log');
+
 require('dotenv').config()
 
 const token = process.env.TOKEN;
+const logger = new TelegramLogger(token, process.env.CHAT_ID);
 
 
 const bot = new TelegramApi(token, {polling: true});
@@ -20,6 +23,7 @@ bot.on('message', msg => {
         bot.sendMessage(chatId, 'Вы можете искать по ФИО, Паспорту или любой информации из строки выше');
 
     }else{
+        logger.log('search = ', text);
         const test = /[а-яё0-9]/i;
         if (!test.test(text)){
             bot.sendMessage(chatId, 'Вы ввели что-то странное.');
